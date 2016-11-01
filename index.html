@@ -2,6 +2,7 @@
   <head>
     <link rel="stylesheet" href="vendor/css/reveal.css">
     <link rel="stylesheet" href="vendor/css/theme/white.css">
+    <link rel="stylesheet" href="vendor/plugin/title-footer/title-footer.css">
   </head>
   <body>
     <div class="reveal">
@@ -284,7 +285,8 @@
           { src: 'vendor/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 
           // Speaker notes
-          { src: 'vendor/plugin/notes/notes.js', async: true }
+          { src: 'vendor/plugin/notes/notes.js', async: true },
+          { src: 'vendor/plugin/title-footer/title-footer.js', async: true, callback: function() { title_footer.initialize(); } }
         ]
       });
     </script>
