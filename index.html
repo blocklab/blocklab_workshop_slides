@@ -198,32 +198,26 @@
           </script>
         </section>
 
+
         <section data-markdown>
           <script type="text/template">
-            ### King of the Ether Throne
+            ### Updating and Patching Contracts
 
-            ```
-            contract KotET {
-              address public king;
-              uint public claimPrice = 100;
-              address owner;
-
-              function KotET() {
-                owner = msg.sender;
-                king = msg.sender;
-              }
-
-              function() {
-                if (msg.value < claimPrice) throw;
-                king.send(compensation);
-                king = msg.sender;
-                claimPrice = msg.value;
-              }
-            }
-            ```
-
-            [Quelle: A survey of attacks on Ethereum smart contracts S.14](https://eprint.iacr.org/2016/1007)
+            > "Deactivate, remove funds from, or __upgrade already deployed contracts__." [Quelle](https://blog.ethereum.org/2016/11/01/security-alert-solidity-variables-can-overwritten-storage/)
           </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Updating and Patching Contracts II
+
+            * Contract hält Adressen von anderen Contracts
+            * Durch Austauschen der Adressen kann auf neue Contracts verwiesen werden
+            * Ein Nutzer dieser Contracts sollte von der Austauschbarkeit wissen
+          </script>
+          <aside class="notes">
+            * Austausch der Adressen kann mit multisig realisiert werden
+          </aside>
         </section>
 
         <section data-markdown>
@@ -234,7 +228,8 @@
             * Zukunft (Hardforks, Umstieg auf Proof of Stake)
           </script>
           <aside class="notes">
-            Unterschied zwischen Banküberweisung tätigen und Handelsgesellschaft aufsetzen
+            * Unterschied zwischen Banküberweisung tätigen und Handelsgesellschaft aufsetzen
+            * Not the blockchain creates immutability. Proof of work does.
           </aside>
         </section>
 
