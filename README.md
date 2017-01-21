@@ -1,3 +1,3 @@
 # View
 
-Download the repository and open the file `index.html` in a modern browser.
+[Open](https://blocklab.github.io/blocklab_workshop_slides/)
