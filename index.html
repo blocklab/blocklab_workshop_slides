@@ -29,11 +29,13 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## Blockchain
+            ## Blockchain-Technologie
 
-            * append-only public ledger (Unveränderlichkeit)
-            * maintained by nodes of a peer-to-peer network (Dezentral)
+            * Dezentral, manipulationssicher und zeitlich angeordnete Daten
           </script>
+          <aside class="notes">
+            Unterschied Dezentral und Distributed. Amazon hat distributed Rechenzentren, diese gehoeren aber weiterhin Amazon.
+          </aside>
         </section>
 
         <section data-markdown>
@@ -90,60 +92,13 @@
           </aside>
         </section>
 
-        <section>
-          <table>
-            <tr>
-              <th></th>
-              <th>Bitcoin</th>
-              <th>Ethereum</th>
-            </tr>
-            <tr>
-              <td>Einführung</td>
-              <td>2009</td>
-              <td>2015</td>
-            </tr>
-            <tr>
-              <td>Wert einer Einheit</td>
-              <td>~650 EUR</td>
-              <td>~10 EUR</td>
-            </tr>
-            <tr>
-              <td>Marktkapitalisierung</td>
-              <td>10 Mrd.</td>
-              <td>1 Mrd.</td>
-            </tr>
-            <tr>
-              <td>Block Reward</td>
-              <td>12.5 BTC</td>
-              <td>5 ETH</td>
-            </tr>
-            <tr>
-              <td>Blocksize</td>
-              <td>1 MB</td>
-              <td>Miner entscheiden (Gaslimit)</td>
-            </tr>
-            <tr>
-              <td>Blocktime</td>
-              <td>10 Min.</td>
-              <td>15 Sek.</td>
-            </tr>
-          </table>
-        </section>
-
         <section data-markdown>
           <script type="text/template">
-            ## Oracles
+            ## Unterschied zu Bitcoin
 
-            * Moderator
-            * Oraclize
-            * Prognosemärkte (Augur, Gnosis)
-
-            [Weitere Informationen](http://site.blocklab.de/2016/oracles-in-ethereum/)
+            * __Bitcoin:__ Wer kann was ausgeben?
+            * __Ethereum:__ Was ist der Zustand der virtuellen Maschine?
           </script>
-
-          <aside class="notes">
-            * OpenBazaar Moderator example
-          </aside>
         </section>
 
         <section data-markdown>
@@ -151,24 +106,15 @@
             ## Werkzeuge
 
             * [TestRPC](https://github.com/ethereumjs/testrpc)
-            * [Truffle](https://github.com/ConsenSys/truffle)
             * [web3](https://github.com/ethereum/web3.js/)
+            * [Truffle](https://github.com/ConsenSys/truffle)
+            * [Parity](https://github.com/ethereum/mist)
             * [MetaMask](https://metamask.io/)
-            * [Mist](https://github.com/ethereum/mist)
           </script>
         </section>
 
         <section>
           Hands-on
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-            ## Beispiele
-
-            * [The DAO](https://github.com/slockit/DAO/blob/master/DAO.sol)
-            * [Augur](https://github.com/AugurProject/augur-core/blob/develop/src/data_api/events.se)
-          </script>
         </section>
 
         <section data-markdown>
@@ -241,14 +187,40 @@
 
         <section data-markdown>
           <script type="text/template">
+            ## Oracles
+
+            * Moderator
+            * Oraclize
+            * Prognosemärkte (Augur, Gnosis)
+
+            [Weitere Informationen](http://site.blocklab.de/2016/oracles-in-ethereum/)
+          </script>
+
+          <aside class="notes">
+            * OpenBazaar Moderator example
+          </aside>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Beispiele
+
+            * [The DAO](https://github.com/slockit/DAO/blob/master/DAO.sol)
+            * [Augur](https://github.com/AugurProject/augur-core/blob/develop/src/data_api/events.se)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
             ### Herausforderungen
 
             * Riesiger Angriffsvektor
-            * Zukunft (Hardforks, Umstieg auf Proof of Stake)
+            * Zukunft (mehrere Hardforks, Umstieg auf Proof of Stake)
           </script>
           <aside class="notes">
             * Unterschied zwischen Banküberweisung tätigen und Handelsgesellschaft aufsetzen
             * Not the blockchain creates immutability. Proof of work does.
+            * ETC wird vermutlich nicht Proof of Stake verwenden
           </aside>
         </section>
 
